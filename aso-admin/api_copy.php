@@ -11,6 +11,28 @@ for ($i = 1; $i <= 40; $i++) {
 }
 
 /**
+ * ディレクトリ内のすべてのファイルとフォルダを削除する関数
+ */
+function deleteDirContents($dir) {
+    if (!is_dir($dir)) {
+        return;
+    }
+    $items = scandir($dir);
+    foreach ($items as $item) {
+        if ($item == '.' || $item == '..') {
+            continue;
+        }
+        $path = $dir . '/' . $item;
+        if (is_dir($path)) {
+            deleteDirContents($path);
+            rmdir($path);
+        } else {
+            unlink($path);
+        }
+    }
+}
+
+/**
  * ディレクトリごと再帰的にコピーする関数（既存ファイルは上書き）
  */
 function copyDir($src, $dst) {
@@ -46,6 +68,9 @@ $success = true;
 
 // 実行
 foreach ($targets as $target) {
+    // コピー前にフォルダ内を空にする
+    deleteDirContents($target);
+    
     if (!copyDir($source, $target)) {
         $success = false;
         break;

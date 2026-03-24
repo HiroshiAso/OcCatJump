@@ -1,217 +1,50 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script type="text/javascript" src="js/asoonfunc.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            onLoadFunc();
-        });
+  <head>
+    <title>ねこジャンプ</title>
+    <link rel="stylesheet" href="._/_.css" />
+  </head>
+  <body>
+    <div class="score-container">
+      <div class="score-display">
+        <div class="score-label">🐟</div>
+        <div class="score-value" id="itemCntDisplay">0</div>
+      </div>
+    </div>
+    <div class="game-container">
+      <canvas id="gameCanvas" width="600" height="400"></canvas>
+      <div class="controls-info">← → : 移動　　Space : ジャンプ</div>
+      <div class="time-info" id="timer">10:00</div>
+      <div id="openingOverlay">
+        <div class="opening-container">
+          <h1 class="opening-title">ねこジャンプ</h1>
+          <h2 class="opening-subtitle play">Enterで開始</h2>
+        </div>
+      </div>
+      <div id="victoryOverlay">
+        <div class="victory-container">
+          <h1 class="victory-title">ゲームクリア！</h1>
+          <h2 class="victory-subtitle play">Enterでリプレイ</h2>
+        </div>
+      </div>
+      <div id="gameOverOverlay">
+        <div class="game-over-container">
+          <h1 class="game-over-title">ゲームオーバー</h1>
+          <h2 class="game-over-subtitle play">Enterでリプレイ</h2>
+        </div>
+      </div>
+    </div>
 
-        const STAMP_MAX = 15;
-
-        function onLoadFunc(){　//起動したらスタンプカードのデータを表示する機能
-            stampDisply();
-            limitDisply();
-            moreDistply();
-            pageDisply();
-        }
-
-        //スタンプ表示機能
-        function stampDisply(){
-            const stmpCnt = parseInt(localStorage.getItem('stamp') || '0', 10);
-            const stmpDisp = stmpCnt % STAMP_MAX;
-
-            for(let i = 1; i <= stmpDisp; i++){
-                const stampElement = document.getElementById("stamp" + i);
-                if (stampElement) {
-                    stampElement.style.visibility = "visible";
-                }
-            }
-        }
-
-        //有効期限表示機能
-        function limitDisply(){
-            const limitDate = new Date();
-            limitDate.setFullYear(limitDate.getFullYear() + 1);
-
-            const y = limitDate.getFullYear();
-            const m = limitDate.getMonth() + 1;
-            const d = limitDate.getDate();
-
-            const limitpElement = document.getElementById("limitp");
-            if (limitpElement) {
-                limitpElement.innerHTML = `有効期限<br>${y}/${m}/${d}`;
-            }
-        }
-
-        //あと何個表示機能
-        function moreDistply(){
-            const stmpCnt = parseInt(localStorage.getItem('stamp') || '0', 10);
-            const stmpDisp = stmpCnt % STAMP_MAX;
-            const moreCnt = STAMP_MAX - stmpDisp;
-
-            const remainCntElement = document.getElementById("remainCnt");
-            if (remainCntElement) {
-                remainCntElement.innerHTML = moreCnt;
-            }
-            
-            const remaindivElement = document.getElementById("remaindiv");
-            if (remaindivElement) {
-                remaindivElement.style.visibility="visible";
-            }
-        }
-
-        //スタンプカードの枚数表示
-        function pageDisply(){
-            const stmpCnt = parseInt(localStorage.getItem('stamp') || '0', 10);
-            const pageCnt = Math.floor(stmpCnt / STAMP_MAX) + 1;
-
-            const pagecntElement = document.getElementById("pagecnt");
-            if (pagecntElement) {
-                pagecntElement.innerHTML = `${pageCnt}枚目`;
-            }
-        }
-        
-        //ボタン１処理
-        function btnClick1(){
-            window.location.href = "ticket.html";
-        }
-        
-        //ボタン２処理
-        function btnClick2(){
-            document.body.style.backgroundColor = "#074981";
-            const headerElement = document.getElementById('header');
-            if (headerElement) {
-                headerElement.style.backgroundColor = '#007aba';
-            }
-        }
-        
-        //ボタン３処理
-        function btnClick3(){
-            localStorage.setItem('money', 0);
-            alert('現金をすべてをいただきました！！！ケケケケ');
-            location.reload();
-        }
-        
-        //ボタン４処理
-        function btnClick4(){
-            const nowMoney = parseInt(localStorage.getItem('money') || '0', 10);
-            localStorage.setItem('money', nowMoney - 150);
-            alert('コーラを飲みました。（－ω－　）ｱｻﾞｰｯｽ');
-        }
-        
-        //ボタン５処理
-        function btnClick5(){
-            if(window.confirm('ドリンクを購入しますか？')){
-                window.location.href = "drink.html";
-            }
-        }
-        
-        //ボタン６処理
-        function btnClick6(){
-            localStorage.setItem('stamp', 0);
-            alert('スタンプをすべてをいただきました！！！ケケケケ');
-            location.reload();
-        }
-        
-        //ボタン７処理
-        function btnClick7(){
-            if (typeof reset_click === 'function') {
-                reset_click();
-            }
-        }
-
-    </script>
-
-</head>
-<body>
-<div id="app-container">
-<div id="header">
-	<img alt="logo" src="img/titlelogo.png" >
-</div>
-<div class="scroll-area">
-<div id="mainpanel">
-	<img alt="スタンプカード" src="img/stampcard.png" width="100%">
-	<div id="limitdiv"><p id="limitp">有効期限XXXX/XX/XX</p></div>
-	<div id="countdiv"><p id="pagecnt">X枚目</p></div>
-	<div id="remaindiv" style="visibility:hidden">ドリンクチケット獲得まであとスタンプ<span id="remainCnt">XX</span>個</div>
-	<div class="stampdiv" >
-		<table style="width: 70%" cellpadding="0" cellspacing="0" >
-			<tr>
-				<td><img alt="1" src="img/1.png" ></td>
-				<td><img alt="2" src="img/2.png" ></td>
-				<td><img alt="3" src="img/3.png" ></td>
-			</tr>
-			<tr>
-				<td><img alt="4" src="img/4.png" ></td>
-				<td><img alt="5" src="img/5.png" ></td>
-				<td><img alt="6" src="img/6.png" ></td>
-			</tr>
-			<tr>
-				<td><img alt="7" src="img/7.png" ></td>
-				<td><img alt="8" src="img/8.png" ></td>
-				<td><img alt="9" src="img/9.png" ></td>
-			</tr>
-			<tr>
-				<td><img alt="10" src="img/10.png" ></td>
-				<td><img alt="11" src="img/11.png" ></td>
-				<td><img alt="12" src="img/12.png" ></td>
-			</tr>
-			<tr>
-				<td><img alt="13" src="img/13.png" ></td>
-				<td><img alt="14" src="img/14.png" ></td>
-				<td><img alt="15" src="img/15.png" ></td>
-			</tr>
-		</table>
-		
-	</div>
-		<div class="stampdiv" >
-		<table style="width: 70%" cellpadding="0" cellspacing="0" >
-			<tr>
-				<td><img alt="1" src="img/s1.png" id="stamp1" style="visibility:hidden"></td>
-				<td><img alt="2" src="img/s2.png" id="stamp2" style="visibility:hidden"></td>
-				<td><img alt="3" src="img/s3.png" id="stamp3" style="visibility:hidden"></td>
-			</tr>
-			<tr>
-				<td><img alt="4" src="img/s4.png" id="stamp4" style="visibility:hidden"></td>
-				<td><img alt="5" src="img/s5.png" id="stamp5" style="visibility:hidden"></td>
-				<td><img alt="6" src="img/s6.png" id="stamp6" style="visibility:hidden"></td>
-			</tr>
-			<tr>
-				<td><img alt="7" src="img/s7.png" id="stamp7" style="visibility:hidden"></td>
-				<td><img alt="8" src="img/s8.png" id="stamp8" style="visibility:hidden"></td>
-				<td><img alt="9" src="img/s9.png" id="stamp9" style="visibility:hidden"></td>
-			</tr>
-			<tr>
-				<td><img alt="10" src="img/s10.png" id="stamp10" style="visibility:hidden"></td>
-				<td><img alt="11" src="img/s11.png" id="stamp11" style="visibility:hidden"></td>
-				<td><img alt="12" src="img/s12.png" id="stamp12" style="visibility:hidden"></td>
-			</tr>
-			<tr>
-				<td><img alt="13" src="img/s13.png" id="stamp13" style="visibility:hidden"></td>
-				<td><img alt="14" src="img/s14.png" id="stamp14" style="visibility:hidden"></td>
-				<td><img alt="15" src="img/s15.png" id="stamp15" style="visibility:hidden"></td>
-			</tr>
-		</table>
-		
-	</div>
-
-</div>
-</div> <!-- scroll-area -->
-<div id="menudiv">
-
-<!-- ↓↓↓★★★ ボタンの表示エリア ★★★↓↓↓ -->
-
-
-
-
-<!-- ↑↑↑★★★ ボタンの表示エリア ★★★↑↑↑ -->    
-
-</div>
-</div> <!-- app-container -->
-</body>
+    <div class="score-container">
+      <div class="score-display">
+        <div class="score-label">🐭</div>
+        <div class="score-value" id="obsCntDisplay">0</div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <!-- <script src="script_ans.js"></script> -->
+    <script src="._/_classes.js"></script>
+    <script src="._/_.js"></script>
+    <script src="._/_media.js"></script>
+  </body>
 </html>

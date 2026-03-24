@@ -8,11 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>AsoCola</h1>
+        <h1>ねこジャンプ</h1>
         <div class="tile-grid">
             <?php for ($i = 1; $i <= 40; $i++): ?>
                 <?php $num = sprintf('%02d', $i); ?>
-                <a href="/OcImageShare/<?= $num ?>/" class="tile"><?= $num ?></a>
+                <a href="/OcCatJump/<?= $num ?>/" class="tile"><?= $num ?></a>
             <?php endfor; ?>
         </div>
     </div>

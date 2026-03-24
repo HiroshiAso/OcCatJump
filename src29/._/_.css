@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.game-container {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.score-container {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.score-display {
+  /* margin: 20px 0; */
+  text-align: center;
+}
+.score-value {
+  font-size: 48px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 120px;
+}
+.score-label {
+  font-size: 48px;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.controls-info {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #95a5a6;
+}
+.time-info {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 32px;
+  color: #2c3e50;
+}
+
+.play {
+  cursor: pointer;
+}
+
+/******/
+
+#gameCanvas {
+  border: 2px solid #333;
+  background-color: #fff;
+  position: relative;
+}
+
+#openingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(224, 224, 224, 0.9),
+    rgba(112, 112, 112, 0.9)
+  );
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.opening-container {
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.opening-title {
+  font-size: 4rem;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  animation: bounce 1s ease-in-out;
+  display: inline-block;
+}
+
+.opening-subtitle {
+  font-size: 2rem;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards 0.5s;
+}
+
+#victoryOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 107, 107, 0.9),
+    rgba(78, 205, 196, 0.9)
+  );
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.victory-container {
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.victory-title {
+  font-size: 4rem;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  animation: bounce 1s ease-in-out;
+  display: inline-block;
+}
+
+.victory-subtitle {
+  font-size: 2rem;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards 0.5s;
+}
+
+#gameOverOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(41, 128, 185, 0.9),
+    rgba(52, 152, 219, 0.9)
+  );
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.game-over-container {
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.game-over-title {
+  font-size: 4rem;
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  animation: shake 1s ease-in-out;
+  display: inline-block;
+}
+
+.game-over-subtitle {
+  font-size: 2rem;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards 0.5s;
+}
+
+.fragments {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  top: -50px;
+  animation: fall 3s linear infinite;
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
