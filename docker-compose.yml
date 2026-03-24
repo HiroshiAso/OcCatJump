@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"        # Host:8080 でコンテナの:80にアクセス可能
+    volumes:
+      - .:/var/www/html   # ローカルと同期（開発用）
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    restart: unless-stopped

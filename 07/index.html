@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web IDE (Monaca-like)</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Title Bar -->
+        <div class="title-bar">
+            <div class="title-left">
+                <i class="fa-solid fa-code"></i>
+                <span>Web IDE</span>
+            </div>
+            <div class="title-right">
+                <button id="save-btn" style="background: #007acc; border: none; color: white; padding: 4px 10px; border-radius: 3px; cursor: pointer; font-size: 12px; font-weight: bold;">
+                    <i class="fa-solid fa-floppy-disk"></i> Save
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Layout -->
+        <div class="main-content">
+            <!-- Activity Bar (Far left thin strip) -->
+            <div class="activity-bar">
+                <div class="activity-icon active" title="Explorer">
+                    <i class="fa-regular fa-file-code"></i>
+                </div>
+                <div class="activity-icon" title="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="activity-spacer"></div>
+                <div class="activity-icon" title="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+
+            <!-- Sidebar (File Explorer) -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <span>EXPLORER</span>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">
+                        <i class="fa-solid fa-chevron-down"></i> PROJECT
+                    </div>
+                    <ul class="file-list" id="file-list">
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Editor Pane (Center) -->
+            <div class="editor-pane">
+                <div class="editor-tabs" id="editor-tabs">
+                    <div class="editor-tab active">
+                        <i class="fa-brands fa-html5" style="color: #e34c26;"></i> index.html
+                    </div>
+                </div>
+                <!-- Monaco Editor Container -->
+                <div id="editor-container"></div>
+            </div>
+
+            <!-- Preview Pane (Right) -->
+            <div class="preview-pane">
+                <div class="preview-header">
+                    <span><i class="fa-solid fa-globe"></i> Preview (Live)</span>
+                    <button id="refresh-btn" title="Refresh Live Preview">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+                <div class="iframe-container">
+                    <iframe id="preview-frame" src="../src07/index.html" sandbox="allow-scripts allow-modals allow-same-origin"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Monaco's AMD Loader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

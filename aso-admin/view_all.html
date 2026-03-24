@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全画面一覧表示 (src01〜src40)</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+        .iframe-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .iframe-card h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+        }
+        .iframe-card iframe {
+            width: 100%;
+            height: 250px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .iframe-card .link-btn {
+            display: inline-block;
+            text-align: center;
+            padding: 8px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .iframe-card .link-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .section-container {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .index-section {
+            background-color: #e3f2fd; /* 薄い青 */
+            border: 2px solid #90caf9;
+        }
+        .drink-section {
+            background-color: #fce4ec; /* 薄いピンク */
+            border: 2px solid #f48fb1;
+        }
+        .section-title {
+            text-align: center;
+            color: #444;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-bottom: 2px dashed #bbb;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>全ユーザー画面一覧プレビュー (src01〜src40)</h1>
+
+    <div class="section-container index-section">
+        <h2 class="section-title">基本画面 (index.html)</h2>
+        <div class="grid-container" id="iframeGrid"></div>
+    </div>
+
+    <div class="section-container drink-section">
+        <h2 class="section-title">ドリンク画面 (drink.html)</h2>
+        <div class="grid-container" id="iframeGridDrinkArea"></div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('iframeGrid');
+        const drinkArea = document.getElementById('iframeGridDrinkArea');
+
+        // src01 から src40 までのiframeを生成する
+        for (let i = 1; i <= 40; i++) {
+            const num = i.toString().padStart(2, '0');
+            const targetDir = `src${num}`;
+            const targetUrl = `../${targetDir}/index.html`;
+
+            const card = document.createElement('div');
+            card.className = 'iframe-card';
+            
+            // loading="lazy" を設定して読み込み負荷を軽減
+            card.innerHTML = `
+                <h2>${targetDir}</h2>
+                <iframe src="${targetUrl}" loading="lazy" title="${targetDir} Preview"></iframe>
+                <a href="${targetUrl}" target="_blank" class="link-btn">別タブで全画面表示</a>
+            `;
+            
+            grid.appendChild(card);
+        }
+
+                // src01 から src40 までのiframeを生成する
+        for (let i = 1; i <= 40; i++) {
+            const num = i.toString().padStart(2, '0');
+            const targetDir = `src${num}`;
+            const targetUrl = `../${targetDir}/drink.html`;
+
+            const card = document.createElement('div');
+            card.className = 'iframe-card';
+            
+            // loading="lazy" を設定して読み込み負荷を軽減
+            card.innerHTML = `
+                <h2>${targetDir}</h2>
+                <iframe src="${targetUrl}" loading="lazy" title="${targetDir} Preview"></iframe>
+                <a href="${targetUrl}" target="_blank" class="link-btn">別タブで全画面表示</a>
+            `;
+            
+            drinkArea.appendChild(card);
+        }
+    </script>
+</body>
+</html>
