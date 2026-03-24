@@ -295,3 +295,54 @@ body {
     height: 100%;
     border: none;
 }
+
+
+/* Zoom Controls */
+.editor-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #1e1e1e;
+}
+.editor-pane .editor-tabs {
+    border-bottom: none;
+    flex-grow: 1;
+}
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.preview-header > span {
+    flex-grow: 1;
+    text-align: center;
+}
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    color: #cccccc;
+    font-size: 13px;
+    user-select: none;
+}
+.zoom-controls .zoom-btn {
+    background: transparent;
+    border: none;
+    color: #cccccc;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.zoom-controls .zoom-btn:hover {
+    background: #444444;
+    color: #ffffff;
+}
+.zoom-controls span {
+    min-width: 40px;
+    text-align: center;
+}
